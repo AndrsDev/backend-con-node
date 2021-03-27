@@ -1,13 +1,13 @@
-const express = require('express');
-const { MoviesService } = require('../services/moviesService');
+import express, { Express } from 'express';
+import { MoviesService } from 'services/movies.service';
 
-function moviesAPI(app) {
+function moviesAPI(app: Express) {
   const router = express.Router();
   const moviesService = new MoviesService();
   app.use('/api/movies', router);
 
 
-  router.get('/', async function(req, res, next) {
+  router.get('/', async function(_, res, next) {
     try {
       const movies = await moviesService.getMovies();
       res.status(200).json({
@@ -22,7 +22,7 @@ function moviesAPI(app) {
   router.get('/:id', async function(req, res, next) {
     const { id } = req.params;
     try {
-      const movies = await moviesService.getMovie(id);
+      const movies = await moviesService.getMovie(Number(id));
       res.status(200).json({
         data: movies,
         message: 'movie retrieved'
@@ -49,10 +49,7 @@ function moviesAPI(app) {
     const { id } = req.params;
     const { body } = req;
     try {
-      const updatedMovieId = await moviesService.updateMovie({
-        id: id,
-        data: body
-      })
+      const updatedMovieId = await moviesService.updateMovie(Number(id), body);
       res.status(200).json({
         data: updatedMovieId,
         message: 'movie updated'
@@ -65,7 +62,7 @@ function moviesAPI(app) {
   router.delete('/:id', async function(req, res, next) {
     const { id } = req.params;
     try {
-      const deletedMovieId = await moviesService.deleteMovie(id)
+      const deletedMovieId = await moviesService.deleteMovie(Number(id))
       res.status(200).json({
         data: deletedMovieId,
         message: 'movie deleted'
@@ -76,4 +73,4 @@ function moviesAPI(app) {
   })
 }
 
-module.exports = moviesAPI
+export default moviesAPI

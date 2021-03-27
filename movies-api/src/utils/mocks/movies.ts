@@ -153,6 +153,4 @@ const moviesMock = [
   }
 ];
 
-module.exports = {
-  moviesMock
-};
+export default moviesMock

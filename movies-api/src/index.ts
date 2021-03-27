@@ -1,6 +1,7 @@
-const { config } = require('./config/index');
-const moviesAPI = require('./routes/movies');
-const express = require('express');
+import { config } from 'config/index';
+import moviesAPI from 'routes/movies';
+import express  from 'express';
+
 const app = express();
 
 moviesAPI(app);
