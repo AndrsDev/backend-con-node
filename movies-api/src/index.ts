@@ -1,5 +1,5 @@
 import { config } from 'config/index';
-import moviesAPI from 'routes/movies';
+import moviesAPI from 'routes/moviesRoute';
 import express  from 'express';
 
 const app = express();

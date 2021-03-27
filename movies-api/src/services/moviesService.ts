@@ -1,5 +1,5 @@
-import { Movie } from 'models/movie.model';
-import moviesMock from 'utils/mocks/movies';
+import { Movie } from 'models/movie';
+import moviesMock from 'utils/mocks/moviesMock';
 
 class MoviesService {
   async getMovies(): Promise<Movie[]> {

@@ -1,5 +1,5 @@
 import express, { Express } from 'express';
-import { MoviesService } from 'services/movies.service';
+import { MoviesService } from 'services/moviesService';
 
 function moviesAPI(app: Express) {
   const router = express.Router();
