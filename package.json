@@ -35,7 +35,11 @@
     "mongodb": "^3.6.5"
   },
   "lint-staged": {
-    "*.ts": "eslint --cache --fix"
+    "*.ts": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
