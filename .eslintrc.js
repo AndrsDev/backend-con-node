@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'prettier'],
   parserOptions: {
     ecmaVersion: 2018,
   },
@@ -17,6 +17,6 @@ module.exports = {
   },
   rules: {
     'no-console': 'warn',
-    '@typescript-eslint/no-explicit-any': false,
+    '@typescript-eslint/no-explicit-any': 0,
   },
 };
