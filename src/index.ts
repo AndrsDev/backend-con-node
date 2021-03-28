@@ -1,6 +1,6 @@
 import { config } from 'config/index';
 import moviesAPI from 'routes/moviesRoute';
-import express  from 'express';
+import express from 'express';
 
 const app = express();
 
@@ -10,5 +10,5 @@ moviesAPI(app);
 
 app.listen(config.port, () => {
   // eslint-disable-next-line no-console
-  console.log(`Listening on http://localhost:${config.port}`)
-})
+  console.log(`Listening on http://localhost:${config.port}`);
+});

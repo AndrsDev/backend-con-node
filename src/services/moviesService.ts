@@ -5,20 +5,19 @@ class MoviesService {
   private collection: string;
   private mongoDB: MongoLib;
 
-
   constructor() {
     this.collection = 'movies';
     this.mongoDB = new MongoLib();
   }
 
   async getMovies({ tags }: any): Promise<Movie[]> {
-    const query = tags && { tags: { $in: tags }}
-    const movies = await this.mongoDB.getAll(this.collection, query)
+    const query = tags && { tags: { $in: tags } };
+    const movies = await this.mongoDB.getAll(this.collection, query);
     return movies || [];
   }
 
-  async getMovie(id: string): Promise<Movie>  {
-    const movie = await this.mongoDB.get(this.collection, id)
+  async getMovie(id: string): Promise<Movie> {
+    const movie = await this.mongoDB.get(this.collection, id);
     return movie;
   }
 
@@ -34,10 +33,8 @@ class MoviesService {
 
   async deleteMovie(id: string): Promise<string> {
     await this.mongoDB.delete(this.collection, id);
-    return id
+    return id;
   }
 }
 
-export {
-  MoviesService
-}
+export { MoviesService };
