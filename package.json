@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "DEBUG=app:* nodemon --exec ts-node -r tsconfig-paths/register src/index.ts",
     "start": "NODE_ENV=production ts-node -r tsconfig-paths/register src/index.ts",
-    "precommit": "lint-staged"
+    "prettier": "prettier --write src/**/*.ts"
   },
   "keywords": [],
   "author": "Andrés Sanabria <andrs.dev@gmail.com>",
@@ -41,12 +41,8 @@
     }
   },
   "lint-staged": {
-    "linters": {
-      "src/**/*.ts": [
-        "eslint --fix",
-        "prettier --write",
-        "git add -A"
-      ]
-    }
+    "src/**/*.ts": [
+      "yarn prettier"
+    ]
   }
 }
