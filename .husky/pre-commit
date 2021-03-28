@@ -4,7 +4,6 @@
 files=$(git diff --name-only --cached -- "*.ts")
 
 if [ ! -z $files ]; then
-  echo $files
   yarn prettier --write $files
   git add $files
 fi
