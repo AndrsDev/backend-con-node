@@ -1,5 +1,10 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn prettier --write src/**/*.ts
-git add -A
+files=$(git diff --name-only --cached -- "*.ts")
+
+if [ ! -z $files ]; then
+  echo $files
+  yarn prettier --write $files
+  git add $files
+fi

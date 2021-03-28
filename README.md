@@ -5,7 +5,8 @@ This project consists on an API-Rest built with node, express, and mongodb. Incl
 1. `git clone git@github.com:AndrsDev/backend-con-node.git`
 2. `cd backend-con-node`
 3. `yarn` or `yarn install`
-4. `yarn dev` or `yarn start`
+4. `yarn husky install`
+5. `yarn dev` or `yarn start`
 
 ### Other
 -  [How to configure commitlint](https://commitlint.js.org/#/)
