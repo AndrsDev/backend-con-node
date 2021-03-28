@@ -4,6 +4,8 @@ import express  from 'express';
 
 const app = express();
 
+app.use(express.json());
+
 moviesAPI(app);
 
 app.listen(config.port, () => {

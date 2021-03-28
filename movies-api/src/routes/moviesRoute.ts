@@ -9,7 +9,7 @@ function moviesAPI(app: Express) {
 
   router.get('/', async function(_, res, next) {
     try {
-      const movies = await moviesService.getMovies();
+      const movies = await moviesService.getMovies({});
       res.status(200).json({
         data: movies,
         message: 'movies listed'
@@ -22,9 +22,9 @@ function moviesAPI(app: Express) {
   router.get('/:id', async function(req, res, next) {
     const { id } = req.params;
     try {
-      const movies = await moviesService.getMovie(Number(id));
+      const movie = await moviesService.getMovie(id);
       res.status(200).json({
-        data: movies,
+        data: movie,
         message: 'movie retrieved'
       })
     } catch (error) {
@@ -37,7 +37,7 @@ function moviesAPI(app: Express) {
     try {
       const createdMovieId = await moviesService.createMovie(body);
       res.status(201).json({
-        data: createdMovieId,
+        data: { id: createdMovieId },
         message: 'movie created'
       })
     } catch (error) {
@@ -49,9 +49,9 @@ function moviesAPI(app: Express) {
     const { id } = req.params;
     const { body } = req;
     try {
-      const updatedMovieId = await moviesService.updateMovie(Number(id), body);
+      const updatedMovieId = await moviesService.updateMovie(id, body);
       res.status(200).json({
-        data: updatedMovieId,
+        data: { id: updatedMovieId },
         message: 'movie updated'
       })
     } catch (error) {
@@ -62,9 +62,9 @@ function moviesAPI(app: Express) {
   router.delete('/:id', async function(req, res, next) {
     const { id } = req.params;
     try {
-      const deletedMovieId = await moviesService.deleteMovie(Number(id))
+      const deletedMovieId = await moviesService.deleteMovie(id)
       res.status(200).json({
-        data: deletedMovieId,
+        data: { id: deletedMovieId },
         message: 'movie deleted'
       })
     } catch (error) {

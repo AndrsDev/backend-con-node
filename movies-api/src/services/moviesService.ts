@@ -1,32 +1,40 @@
 import { Movie } from 'models/movie';
-import moviesMock from 'utils/mocks/moviesMock';
+import MongoLib from 'libraries/mongoLib';
 
 class MoviesService {
-  async getMovies(): Promise<Movie[]> {
-    const movies = await Promise.resolve(moviesMock);
+  private collection: string;
+  private mongoDB: MongoLib;
+
+
+  constructor() {
+    this.collection = 'movies';
+    this.mongoDB = new MongoLib();
+  }
+
+  async getMovies({ tags }: any): Promise<Movie[]> {
+    const query = tags && { tags: { $in: tags }}
+    const movies = await this.mongoDB.getAll(this.collection, query)
     return movies || [];
   }
 
-  async getMovie(id: number): Promise<Movie>  {
-    const movie = await Promise.resolve(moviesMock[id]);
-    return movie || {};
+  async getMovie(id: string): Promise<Movie>  {
+    const movie = await this.mongoDB.get(this.collection, id)
+    return movie;
   }
 
-  async createMovie(data: any): Promise<string> {
-    const createdMovieId = await Promise.resolve(moviesMock[0].id);
-    console.log(data);
-    return createdMovieId;
+  async createMovie(data: Movie): Promise<string> {
+    const operation = await this.mongoDB.create(this.collection, data);
+    return operation.insertedId;
   }
 
-  async updateMovie(id: number, data: any): Promise<string> {
-    const updatedMovieId = await Promise.resolve(moviesMock[id].id);
-    console.log(data)
-    return updatedMovieId;
+  async updateMovie(id: string, data: Movie): Promise<string> {
+    await this.mongoDB.update(this.collection, id, data);
+    return id;
   }
 
-  async deleteMovie(id: number): Promise<string> {
-    const deletedMovieId = await Promise.resolve(moviesMock[id].id);
-    return deletedMovieId;
+  async deleteMovie(id: string): Promise<string> {
+    await this.mongoDB.delete(this.collection, id);
+    return id
   }
 }
 
