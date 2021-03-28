@@ -1,12 +1,4 @@
-import {
-  Db,
-  DeleteWriteOpResultObject,
-  FilterQuery,
-  InsertOneWriteOpResult,
-  MongoClient,
-  ObjectId,
-  UpdateWriteOpResult,
-} from 'mongodb';
+import { Db, DeleteWriteOpResultObject, FilterQuery, InsertOneWriteOpResult, MongoClient, ObjectId, UpdateWriteOpResult } from 'mongodb';
 import { config } from 'config';
 import { Movie } from 'models/movie';
 
@@ -16,6 +8,8 @@ const DB_HOST = encodeURIComponent(config.DB_HOST);
 const DB_NAME = encodeURIComponent(config.DB_NAME);
 
 const uri = `mongodb+srv://${USER}:${PASSWORD}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`;
+
+
 
 class MongoLib {
   static connection: Promise<Db>;
@@ -57,29 +51,19 @@ class MongoLib {
     return db.collection(collection).findOne({ _id: new ObjectId(id) });
   }
 
-  async create(
-    collection: string,
-    data: Movie
-  ): Promise<InsertOneWriteOpResult<any>> {
+  async create(collection: string, data: Movie): Promise<InsertOneWriteOpResult<any>> {
     const db = await this.connect();
     return db.collection(collection).insertOne(data);
   }
 
-  async update(
-    collection: string,
-    id: string,
-    data: Movie
-  ): Promise<UpdateWriteOpResult> {
+  async update(collection: string, id: string, data: Movie): Promise<UpdateWriteOpResult> {
     const db = await this.connect();
     return db
       .collection(collection)
       .updateOne({ _id: new ObjectId(id) }, { $set: data }, { upsert: true });
   }
 
-  async delete(
-    collection: string,
-    id: string
-  ): Promise<DeleteWriteOpResultObject> {
+  async delete(collection: string, id: string): Promise<DeleteWriteOpResultObject>  {
     const db = await this.connect();
     return db.collection(collection).deleteOne({ _id: new ObjectId(id) });
   }
