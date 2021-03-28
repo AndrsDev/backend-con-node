@@ -35,7 +35,7 @@
     "mongodb": "^3.6.5"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    "pre-commit": "yarn lint-staged"
   },
   "lint-staged": {
     "*.ts": [
