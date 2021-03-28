@@ -39,10 +39,5 @@
     "hooks": {
       "pre-commit": "yarn prettier"
     }
-  },
-  "lint-staged": {
-    "src/**/*.ts": [
-      "yarn prettier"
-    ]
   }
 }
