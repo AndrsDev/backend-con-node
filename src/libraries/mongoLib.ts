@@ -11,7 +11,6 @@ const DB_NAME = encodeURIComponent(config.DB_NAME);
 const uri = `mongodb+srv://${USER}:${PASSWORD}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`;
 
 
-
 class MongoLib {
   static connection: Promise<Db>;
   private client: MongoClient;
