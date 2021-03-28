@@ -38,7 +38,7 @@
     "*.ts": [
       "prettier --write",
       "eslint --fix",
-      "git add"
+      "git add -A"
     ]
   },
   "simple-git-hooks": {
