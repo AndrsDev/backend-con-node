@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import { MoviesService } from 'services/moviesService';
 
-function moviesAPI(app: Express) {
+function moviesAPI(app: Express): void {
   const router = express.Router();
   const moviesService = new MoviesService();
   app.use('/api/movies', router);
