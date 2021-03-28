@@ -3,8 +3,6 @@ import { config } from 'config';
 import { Movie } from 'models/movie';
 
 
-
-
 const USER = encodeURIComponent(config.DB_USER);
 const PASSWORD = encodeURIComponent(config.DB_PASSWORD);
 const DB_HOST = encodeURIComponent(config.DB_HOST);
