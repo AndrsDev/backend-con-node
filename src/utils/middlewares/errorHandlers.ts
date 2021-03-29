@@ -1,0 +1,48 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+/* 
+  Error middlewares documentation:
+  https://expressjs.com/en/guide/error-handling.html
+*/
+
+import boom from '@hapi/boom';
+import { config } from 'config';
+import { NextFunction, Request, Response } from 'express';
+
+function buildError({ payload, stack }: any): Record<string, unknown> {
+  if (config.dev) {
+    return {
+      ...payload,
+      stack,
+    };
+  }
+  return { error: payload };
+}
+
+function errorWrapper(
+  err: any,
+  _req: Request,
+  _res: Response,
+  next: NextFunction
+) {
+  if (err.isBoom) {
+    next(err);
+  }
+  next(boom.badImplementation(err));
+}
+
+function errorHandler(
+  err: any,
+  _req: Request,
+  res: Response,
+  _next: NextFunction
+): void {
+  const {
+    output: { statusCode },
+  } = err;
+
+  res.status(statusCode);
+  res.json(buildError(err));
+}
+
+export { errorWrapper, errorHandler };

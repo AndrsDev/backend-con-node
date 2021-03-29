@@ -16,7 +16,7 @@ module.exports = {
     mocha: true,
   },
   rules: {
-    'no-console': 'warn',
     '@typescript-eslint/no-explicit-any': 0,
+    '@typescript-eslint/explicit-module-boundary-types': 0,
   },
 };
