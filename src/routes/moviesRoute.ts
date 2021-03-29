@@ -1,5 +1,5 @@
 import express, { Express } from 'express';
-import { MoviesService } from 'services/moviesService';
+import MoviesService from 'services/moviesService';
 import {
   movieIdSchema,
   createMovieSchema,

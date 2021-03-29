@@ -37,4 +37,4 @@ class MoviesService {
   }
 }
 
-export { MoviesService };
+export default MoviesService;

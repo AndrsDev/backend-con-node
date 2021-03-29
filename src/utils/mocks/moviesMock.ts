@@ -153,4 +153,24 @@ const moviesMock = [
   },
 ];
 
-export default moviesMock;
+function filteredMoviesMock(tag: string) {
+  return moviesMock.filter((movie) => movie.tags.includes(tag));
+}
+
+class MoviesServiceMock {
+  /*
+    Needed for proxiquire to work properly. 
+    https://github.com/thlorenz/proxyquire#preventing-call-thru-to-original-dependency
+  */
+  static '@noCallThru' = true;
+
+  async getMovies() {
+    return Promise.resolve(moviesMock);
+  }
+
+  async createMovie() {
+    return Promise.resolve(moviesMock[0]);
+  }
+}
+
+export { moviesMock, filteredMoviesMock, MoviesServiceMock };
