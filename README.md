@@ -13,7 +13,7 @@ This project consists on an API-Rest built with node, express, and mongodb. Incl
 ## Build docker container
 
 1. `docker build -t movies-api .`
-2. `docker run -d movies-api`
+2. `docker run -p 3000:3000 -d movies-api`
 
 ### Other
 
