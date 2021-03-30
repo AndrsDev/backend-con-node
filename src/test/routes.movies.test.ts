@@ -8,7 +8,7 @@ describe('routes - movies', function () {
     'services/moviesService': MoviesServiceMock,
   });
 
-  const request = testServer(route);
+  const request = testServer(route.default);
   describe('GET /movies', function () {
     it('should respond with status 200', function (done) {
       request.get('/api/movies').expect(200, done);
