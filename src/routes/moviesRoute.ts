@@ -5,8 +5,9 @@ import {
   createMovieSchema,
   updateMovieSchema,
 } from 'utils/schemas/movieScheme';
-
 import validationHandler from 'utils/middlewares/validationHandler';
+import cacheResponse from 'utils/cacheResponse';
+import { FIVE_MINUTES_IN_SECONDS, SIXTY_MINUTES_IN_SECONDS } from 'utils/time';
 
 function moviesAPI(app: Express): void {
   const router = express.Router();
@@ -14,6 +15,7 @@ function moviesAPI(app: Express): void {
   app.use('/api/movies', router);
 
   router.get('/', async function (_, res, next) {
+    cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
     try {
       const movies = await moviesService.getMovies({});
       res.status(200).json({
@@ -29,6 +31,7 @@ function moviesAPI(app: Express): void {
     '/:id',
     validationHandler({ id: movieIdSchema }, 'params'),
     async function (req, res, next) {
+      cacheResponse(res, SIXTY_MINUTES_IN_SECONDS);
       const { id } = req.params;
       try {
         const movie = await moviesService.getMovie(id);
