@@ -52,7 +52,10 @@
   "nyc": {
     "all": true,
     "include": [
-      "src/**"
+      "src/**/*.{ts,js}"
+    ],
+    "exclude": [
+      "src/index.ts"
     ]
   }
 }
