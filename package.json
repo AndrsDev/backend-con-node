@@ -11,6 +11,9 @@
     "coverage": "nyc yarn test",
     "report": "nyc report --reporter=html && open coverage/index.html"
   },
+  "engines": {
+    "node": "15.x"
+  },
   "keywords": [],
   "author": "Andrés Sanabria <andrs.dev@gmail.com>",
   "license": "ISC",
