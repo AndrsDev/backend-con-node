@@ -1,6 +1,6 @@
 # NodeJS Backend
 
-This project consists on an API-Rest built with node, express, and mongodb. Includes a CRUD for movies.
+This project consists on an API-Rest built with node, express, and mongodb. Includes a CRUD for movies and users.
 
 ## Get started
 

@@ -8,7 +8,6 @@ import {
   UpdateWriteOpResult,
 } from 'mongodb';
 import { config } from 'config';
-import { Movie } from 'models/movie';
 
 const USER = encodeURIComponent(config.DB_USER);
 const PASSWORD = encodeURIComponent(config.DB_PASSWORD);
@@ -46,20 +45,20 @@ class MongoLib {
 
   async getAll(
     collection: string,
-    query?: FilterQuery<Movie[]>
-  ): Promise<Movie[]> {
+    query?: FilterQuery<Record<string, any>>
+  ): Promise<Record<string, any>[]> {
     const db = await this.connect();
     return db.collection(collection).find(query).toArray();
   }
 
-  async get(collection: string, id: string): Promise<Movie> {
+  async get(collection: string, id: string): Promise<Record<string, any>> {
     const db = await this.connect();
     return db.collection(collection).findOne({ _id: new ObjectId(id) });
   }
 
   async create(
     collection: string,
-    data: Movie
+    data: Record<string, any>
   ): Promise<InsertOneWriteOpResult<any>> {
     const db = await this.connect();
     return db.collection(collection).insertOne(data);
@@ -68,7 +67,7 @@ class MongoLib {
   async update(
     collection: string,
     id: string,
-    data: Movie
+    data: Record<string, any>
   ): Promise<UpdateWriteOpResult> {
     const db = await this.connect();
     return db
