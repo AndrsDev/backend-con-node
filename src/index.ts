@@ -1,9 +1,10 @@
 import { config } from 'config';
-import moviesAPI from 'routes/moviesRoute';
+import moviesRoute from 'routes/moviesRoute';
 import express from 'express';
 import cors from 'cors';
 import { errorHandler, errorWrapper } from 'utils/middlewares/errorHandlers';
 import notFoundHandler from 'utils/middlewares/notFoundHandler';
+import userMoviesRoute from 'routes/userMoviesRoutes';
 
 const app = express();
 app.use(cors());
@@ -12,7 +13,8 @@ app.use(cors());
 app.use(express.json());
 
 //Routes
-moviesAPI(app);
+moviesRoute(app);
+userMoviesRoute(app);
 
 //Error middlewares
 app.use(notFoundHandler); //Catch 404

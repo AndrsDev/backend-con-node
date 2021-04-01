@@ -4,12 +4,12 @@ import {
   movieIdSchema,
   createMovieSchema,
   updateMovieSchema,
-} from 'utils/schemas/movieScheme';
+} from 'utils/schemas/movieSchema';
 import validationHandler from 'utils/middlewares/validationHandler';
 import cacheResponse from 'utils/cacheResponse';
 import { FIVE_MINUTES_IN_SECONDS, SIXTY_MINUTES_IN_SECONDS } from 'utils/time';
 
-function moviesAPI(app: Express): void {
+function moviesRoute(app: Express): void {
   const router = express.Router();
   const moviesService = new MoviesService();
   app.use('/api/movies', router);
@@ -99,4 +99,4 @@ function moviesAPI(app: Express): void {
   );
 }
 
-export default moviesAPI;
+export default moviesRoute;

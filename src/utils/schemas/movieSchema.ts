@@ -1,4 +1,4 @@
-import joi from '@hapi/joi';
+import joi from 'joi';
 
 const movieIdSchema = joi.string().regex(/^[0-9a-fA-F]{24}$/);
 const movieTitleSchema = joi.string().max(80);
