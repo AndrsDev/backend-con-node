@@ -5,6 +5,7 @@ import cors from 'cors';
 import { errorHandler, errorWrapper } from 'utils/middlewares/errorHandlers';
 import notFoundHandler from 'utils/middlewares/notFoundHandler';
 import userMoviesRoute from 'routes/userMoviesRoutes';
+import authRoute from 'routes/authRoute';
 
 const app = express();
 app.use(cors());
@@ -15,6 +16,7 @@ app.use(express.json());
 //Routes
 moviesRoute(app);
 userMoviesRoute(app);
+authRoute(app);
 
 //Error middlewares
 app.use(notFoundHandler); //Catch 404
