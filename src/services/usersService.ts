@@ -14,12 +14,12 @@ class UsersService {
   async getUser(email: string): Promise<User> {
     const query = { email: { $eq: email } };
     const [user] = await this.mongoDB.getAll(this.collection, query);
-    return user;
+    return user as User;
   }
 
   async createUser(user: User): Promise<string> {
     const { name, email, password } = user;
-    const hashedPassword = bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
     const operation = await this.mongoDB.create(this.collection, {
       name,
       email,

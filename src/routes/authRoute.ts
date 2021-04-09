@@ -5,11 +5,44 @@ import jwt from 'jsonwebtoken';
 import { config } from 'config';
 import ApiKeysService from 'services/apiKeysService';
 import basicStrategy from 'utils/auth/strategies/basic';
+import validationHandler from 'utils/middlewares/validationHandler';
+import { createUserSchema } from 'utils/schemas/userSchema';
+import UsersService from 'services/usersService';
+import { User } from 'models/user';
 
 function authRoute(app: Express) {
   const router = express.Router();
   const apiKeysService = new ApiKeysService();
+  const usersService = new UsersService();
   app.use('/api/auth', router);
+
+  router.post(
+    '/register',
+    validationHandler(createUserSchema),
+    async function (req, res, next) {
+      const body: User = req.body;
+
+      try {
+        // Verify if the user already exists
+        const user = await usersService.getUser(body.email);
+        if (user) {
+          res.status(400).json({
+            message: 'user already exists',
+          });
+          return;
+        }
+
+        // Create the user and return the response
+        const createdUserId = await usersService.createUser(body);
+        res.status(201).json({
+          data: { id: createdUserId },
+          message: 'user created',
+        });
+      } catch (error) {
+        next(error);
+      }
+    }
+  );
 
   router.post(
     '/login',
