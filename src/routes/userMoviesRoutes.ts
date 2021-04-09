@@ -7,6 +7,8 @@ import {
   createUserMovieSchema,
   userMovieIdSchema,
 } from 'utils/schemas/userMoviesSchema';
+import passport from 'passport';
+import jwtStrategy from 'utils/auth/strategies/jwt';
 
 function userMoviesRoute(app: Express) {
   const router = express.Router();
@@ -15,6 +17,7 @@ function userMoviesRoute(app: Express) {
 
   router.get(
     '/',
+    passport.authenticate(jwtStrategy, { session: false }),
     validationHandler({ userId: userIdSchema }, 'query'),
     async function (req, res, next) {
       const { userId } = req.query;
@@ -34,6 +37,7 @@ function userMoviesRoute(app: Express) {
 
   router.post(
     '/',
+    passport.authenticate(jwtStrategy, { session: false }),
     validationHandler(createUserMovieSchema),
     async function (req, res, next) {
       const { body } = req;
@@ -54,6 +58,7 @@ function userMoviesRoute(app: Express) {
 
   router.delete(
     '/:userMovieId',
+    passport.authenticate(jwtStrategy, { session: false }),
     validationHandler({ userMovieId: userMovieIdSchema }, 'params'),
     async function (req, res, next) {
       const { userMovieId } = req.params;
