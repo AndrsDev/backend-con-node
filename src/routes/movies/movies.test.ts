@@ -10,10 +10,11 @@ describe('routes - movies', function () {
 
   const request = testServer(route.default);
   describe('GET /movies', function () {
-    it('should respond with status 200', function (done) {
-      request.get('/api/movies').expect(200, done);
+    it('should respond with status 401', function (done) {
+      request.get('/api/movies').expect(401, done);
     });
 
+    //TODO: update the test with a valid bearer token
     it('should respond with the list of movies', function (done) {
       request.get('/api/movies').end((_err, res) => {
         assert.deepStrictEqual(res.body, {
