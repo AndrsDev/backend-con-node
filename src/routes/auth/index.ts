@@ -7,7 +7,7 @@ import ApiKeysService from 'services/apiKeysService';
 import basicStrategy from 'utils/auth/strategies/basic';
 import validationHandler from 'utils/middlewares/validationHandler';
 import { createUserSchema } from 'utils/schemas/userSchema';
-import UsersService from 'services/usersService';
+import UsersService from 'services/users';
 import { User } from 'models/user';
 
 function authRoute(app: Express) {

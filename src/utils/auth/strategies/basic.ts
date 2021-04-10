@@ -1,7 +1,7 @@
 import { BasicStrategy } from 'passport-http';
 import boom from '@hapi/boom';
 import bcrypt from 'bcrypt';
-import UsersService from 'services/usersService';
+import UsersService from 'services/users';
 import { User } from 'models/user';
 
 const basicStrategy = new BasicStrategy(async function (

@@ -1,5 +1,5 @@
 import express, { Express } from 'express';
-import UserMoviesService from 'services/userMovesService';
+import UserMoviesService from 'services/user-movies';
 import validationHandler from 'utils/middlewares/validationHandler';
 import scopesValidationHandler from 'utils/middlewares/scopesValidationHandler';
 import { userIdSchema } from 'utils/schemas/userSchema';

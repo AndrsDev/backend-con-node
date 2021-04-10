@@ -4,7 +4,7 @@ import MongoLibMock, { getAllStub } from 'utils/mocks/mongoLib';
 import { moviesMock } from 'utils/mocks/moviesMock';
 
 describe('services - movies', function () {
-  const MoviesService = proxyquire('services/moviesService', {
+  const MoviesService = proxyquire('services/movies', {
     'libraries/mongoLib': MongoLibMock,
   });
 

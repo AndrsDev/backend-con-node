@@ -1,6 +1,6 @@
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import boom from '@hapi/boom';
-import UsersService from 'services/usersService';
+import UsersService from 'services/users';
 import { config } from 'config';
 
 const jwtStrategy = new Strategy(

@@ -1,5 +1,5 @@
 import express, { Express } from 'express';
-import MoviesService from 'services/moviesService';
+import MoviesService from 'services/movies';
 import {
   movieIdSchema,
   createMovieSchema,
@@ -7,8 +7,11 @@ import {
 } from 'utils/schemas/movieSchema';
 import validationHandler from 'utils/middlewares/validationHandler';
 import scopesValidationHandler from 'utils/middlewares/scopesValidationHandler';
-import cacheResponse from 'utils/cacheResponse';
-import { FIVE_MINUTES_IN_SECONDS, SIXTY_MINUTES_IN_SECONDS } from 'utils/time';
+import cacheResponse from 'utils/common/cacheResponse';
+import {
+  FIVE_MINUTES_IN_SECONDS,
+  SIXTY_MINUTES_IN_SECONDS,
+} from 'utils/common/time';
 import passport from 'passport';
 import jwtStrategy from 'utils/auth/strategies/jwt';
 

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import buildMessage from 'utils/buildMessage';
+import buildMessage from 'utils/common/buildMessage';
 
 describe('utils - buildMessage', function () {
   describe('when receives an entity and an action', function () {

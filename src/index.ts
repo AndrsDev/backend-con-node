@@ -1,11 +1,11 @@
 import { config } from 'config';
-import moviesRoute from 'routes/moviesRoute';
 import express from 'express';
 import cors from 'cors';
 import { errorHandler, errorWrapper } from 'utils/middlewares/errorHandlers';
 import notFoundHandler from 'utils/middlewares/notFoundHandler';
-import userMoviesRoute from 'routes/userMoviesRoutes';
-import authRoute from 'routes/authRoute';
+import userMoviesRoute from 'routes/user-movies';
+import authRoute from 'routes/auth';
+import moviesRoute from 'routes/movies';
 
 const app = express();
 app.use(cors());

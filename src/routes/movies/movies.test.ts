@@ -1,11 +1,11 @@
 import { moviesMock, MoviesServiceMock } from 'utils/mocks/moviesMock';
 import assert from 'assert';
 import proxyquire from 'proxyquire';
-import testServer from 'utils/testServer';
+import testServer from 'utils/common/testServer';
 
 describe('routes - movies', function () {
-  const route = proxyquire('routes/moviesRoute', {
-    'services/moviesService': MoviesServiceMock,
+  const route = proxyquire('routes/movies', {
+    'services/movies': MoviesServiceMock,
   });
 
   const request = testServer(route.default);
