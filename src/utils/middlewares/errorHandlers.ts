@@ -9,14 +9,14 @@ import boom from '@hapi/boom';
 import { config } from 'config';
 import { NextFunction, Request, Response } from 'express';
 
-function buildError({ payload, stack }: any): Record<string, unknown> {
+function buildError({ output, stack }: any): Record<string, unknown> {
   if (config.dev) {
     return {
-      ...payload,
+      ...output.payload,
       stack,
     };
   }
-  return { error: payload };
+  return { error: output.payload };
 }
 
 function errorWrapper(
@@ -27,6 +27,7 @@ function errorWrapper(
 ) {
   if (err.isBoom) {
     next(err);
+    return;
   }
   next(boom.badImplementation(err));
 }
@@ -37,11 +38,7 @@ function errorHandler(
   res: Response,
   _next: NextFunction
 ): void {
-  const {
-    output: { statusCode },
-  } = err;
-
-  res.status(statusCode);
+  res.status(err.output.statusCode);
   res.json(buildError(err));
 }
 

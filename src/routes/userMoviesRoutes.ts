@@ -1,6 +1,7 @@
 import express, { Express } from 'express';
 import UserMoviesService from 'services/userMovesService';
 import validationHandler from 'utils/middlewares/validationHandler';
+import scopesValidationHandler from 'utils/middlewares/scopesValidationHandler';
 import { userIdSchema } from 'utils/schemas/userSchema';
 
 import {
@@ -18,6 +19,7 @@ function userMoviesRoute(app: Express) {
   router.get(
     '/',
     passport.authenticate(jwtStrategy, { session: false }),
+    scopesValidationHandler(['read:user-movies']),
     validationHandler({ userId: userIdSchema }, 'query'),
     async function (req, res, next) {
       const { userId } = req.query;
@@ -38,6 +40,7 @@ function userMoviesRoute(app: Express) {
   router.post(
     '/',
     passport.authenticate(jwtStrategy, { session: false }),
+    scopesValidationHandler(['create:user-movies']),
     validationHandler(createUserMovieSchema),
     async function (req, res, next) {
       const { body } = req;
@@ -59,6 +62,7 @@ function userMoviesRoute(app: Express) {
   router.delete(
     '/:userMovieId',
     passport.authenticate(jwtStrategy, { session: false }),
+    scopesValidationHandler(['delete:user-movies']),
     validationHandler({ userMovieId: userMovieIdSchema }, 'params'),
     async function (req, res, next) {
       const { userMovieId } = req.params;
