@@ -25,6 +25,7 @@
     "@commitlint/config-conventional": "^12.0.1",
     "@testdeck/mocha": "^0.1.2",
     "@types/bcrypt": "^3.0.0",
+    "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.10",
     "@types/debug": "^4.1.5",
     "@types/express": "^4.17.11",
@@ -59,6 +60,7 @@
   "dependencies": {
     "@hapi/boom": "^9.1.2",
     "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

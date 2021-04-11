@@ -1,6 +1,7 @@
 import { config } from 'config';
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import { errorHandler, errorWrapper } from 'utils/middlewares/errorHandlers';
 import notFoundHandler from 'utils/middlewares/notFoundHandler';
 import userMoviesRoute from 'routes/user-movies';
@@ -10,8 +11,9 @@ import moviesRoute from 'routes/movies';
 const app = express();
 app.use(cors());
 
-//Body Parser
+//Parsers
 app.use(express.json());
+app.use(cookieParser());
 
 //Routes
 moviesRoute(app);

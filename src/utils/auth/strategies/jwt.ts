@@ -1,12 +1,19 @@
-import { Strategy, ExtractJwt } from 'passport-jwt';
+import { Strategy } from 'passport-jwt';
 import boom from '@hapi/boom';
 import UsersService from 'services/users';
 import { config } from 'config';
+import { Request } from 'express';
+
+function cookieExtractor(req: Request) {
+  let token = null;
+  if (req?.cookies) token = req.cookies['token'];
+  return token;
+}
 
 const jwtStrategy = new Strategy(
   {
     secretOrKey: config.AUTH_JWT_SECRET,
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    jwtFromRequest: cookieExtractor,
   },
   async function (payload, callback) {
     const usersService = new UsersService();

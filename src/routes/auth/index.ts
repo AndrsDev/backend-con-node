@@ -79,7 +79,11 @@ function authRoute(app: Express) {
         expiresIn: '15m',
       });
 
-      //Return the JWT
+      //Return the JWT and set the cookie
+      res.cookie('token', token, {
+        httpOnly: !config.dev,
+        secure: !config.dev,
+      });
       return res.status(200).json({ token });
     }
   );

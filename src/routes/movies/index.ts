@@ -24,7 +24,7 @@ function moviesRoute(app: Express): void {
     '/',
     passport.authenticate(jwtStrategy, { session: false }),
     scopesValidationHandler(['read:movies']),
-    async function (_, res, next) {
+    async function (_req, res, next) {
       cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
       try {
         const movies = await moviesService.getMovies({});
