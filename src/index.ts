@@ -9,7 +9,12 @@ import authRoute from 'routes/auth';
 import moviesRoute from 'routes/movies';
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 
 //Parsers
 app.use(express.json());

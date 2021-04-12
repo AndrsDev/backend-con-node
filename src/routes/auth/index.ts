@@ -83,6 +83,7 @@ function authRoute(app: Express) {
       res.cookie('token', token, {
         httpOnly: !config.dev,
         secure: !config.dev,
+        sameSite: 'none',
       });
       return res.status(200).json({ token });
     }
