@@ -71,7 +71,7 @@ function userMoviesRoute(app: Express) {
         const deletedUserMoveId = await userMoviesService.deleteUserMovie(
           userMovieId
         );
-        res.send(200).json({
+        res.status(200).json({
           data: { id: deletedUserMoveId },
           message: 'user movie deleted',
         });

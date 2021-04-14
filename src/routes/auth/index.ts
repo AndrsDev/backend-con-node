@@ -9,6 +9,10 @@ import validationHandler from 'utils/middlewares/validationHandler';
 import { createUserSchema } from 'utils/schemas/userSchema';
 import UsersService from 'services/users';
 import { User } from 'models/user';
+import {
+  THIRTY_DAYS_IN_MILLISECONDS,
+  TWO_HOURS_IN_MILLISECONDS,
+} from 'utils/common/time';
 
 function authRoute(app: Express) {
   const router = express.Router();
@@ -48,6 +52,7 @@ function authRoute(app: Express) {
     '/login',
     passport.authenticate(basicStrategy, { session: false }),
     async function (req, res, next) {
+      const { rememberMe } = req.body;
       const { API_KEY_TOKEN } = req.query;
 
       //Verify if the API_KEY_TOKEN is present
@@ -84,6 +89,9 @@ function authRoute(app: Express) {
         httpOnly: !config.dev,
         secure: !config.dev,
         sameSite: 'none',
+        maxAge: rememberMe
+          ? THIRTY_DAYS_IN_MILLISECONDS
+          : TWO_HOURS_IN_MILLISECONDS,
       });
       return res.status(200).json({ token });
     }
