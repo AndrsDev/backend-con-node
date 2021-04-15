@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import { config } from 'config';
 import ApiKeysService from 'services/apiKeysService';
 import basicStrategy from 'utils/auth/strategies/basic';
+import GoogleStrategy from 'utils/auth/strategies/oauth';
 import validationHandler from 'utils/middlewares/validationHandler';
 import { createUserSchema } from 'utils/schemas/userSchema';
 import UsersService from 'services/users';
@@ -94,6 +95,27 @@ function authRoute(app: Express) {
           : TWO_HOURS_IN_MILLISECONDS,
       });
       return res.status(200).json({ token });
+    }
+  );
+
+  router.get(
+    '/google',
+    passport.authenticate(GoogleStrategy, {
+      scope: ['openid', 'profile', 'email'],
+    })
+  );
+
+  router.get(
+    '/google/callback',
+    passport.authenticate(GoogleStrategy, {
+      session: false,
+    }),
+    async function (req, res, _next) {
+      console.log(req.user);
+      res.status(201).json({
+        data: { user: req.user },
+        message: 'login success with google',
+      });
     }
   );
 }
