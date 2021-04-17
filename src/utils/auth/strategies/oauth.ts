@@ -1,18 +1,27 @@
 import { config } from 'config';
 import { OAuth2Strategy } from 'passport-google-oauth';
+import { User } from 'models/user';
+import UsersService from 'services/users';
 
 const GoogleStrategy = new OAuth2Strategy(
   {
     clientID: config.GOOGLE_CLIENT_ID,
     clientSecret: config.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/api/auth/google/callback',
+    callbackURL: '/api/client/google/callback',
   },
-  function (_accessToken, _refreshToken, profile, done) {
-    // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-    //   return done(err, user);
-    // });
+  async function (_accessToken, _refreshToken, profile, done) {
+    const usersService = new UsersService();
+    const { name, email } = profile._json;
+    const data: User = {
+      name,
+      email,
+    };
 
-    return done(null, profile);
+    const user = await usersService.getOrCreateUser(data);
+    return done(null, {
+      ...user,
+      apiKeyToken: config.PUBLIC_API_KEY_TOKEN,
+    });
   }
 );
 

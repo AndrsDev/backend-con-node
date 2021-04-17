@@ -27,6 +27,16 @@ class UsersService {
     });
     return operation.insertedId;
   }
+
+  async getOrCreateUser(user: User): Promise<User> {
+    const foundUser = await this.getUser(user.email);
+    if (foundUser) {
+      return user;
+    }
+
+    await this.createUser(user);
+    return await this.getUser(user.email);
+  }
 }
 
 export default UsersService;
