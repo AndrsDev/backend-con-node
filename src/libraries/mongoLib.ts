@@ -35,8 +35,9 @@ class MongoLib {
         this.client.connect((err) => {
           if (err) {
             reject(err);
+          } else {
+            resolve(this.client.db(this.dbName));
           }
-          resolve(this.client.db(this.dbName));
         });
       });
     }
