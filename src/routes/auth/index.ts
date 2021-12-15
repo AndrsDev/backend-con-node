@@ -12,6 +12,7 @@ import {
 } from 'utils/common/time';
 import apiKeyTokenValidationHandler from 'utils/middlewares/apiKeyTokenValidationHandler';
 import generateAuthJWT from 'utils/common/generateAuthJWT';
+import boom from '@hapi/boom';
 
 function authRoute(app: Express) {
   const router = express.Router();
@@ -54,11 +55,12 @@ function authRoute(app: Express) {
       const { rememberMe } = req.body;
       const { API_KEY_TOKEN } = req.query;
 
-      const token = await generateAuthJWT(
-        API_KEY_TOKEN as string,
-        req.user,
-        next
-      );
+      const token = await generateAuthJWT(API_KEY_TOKEN as string, req.user);
+
+      if (!token) {
+        next(boom.unauthorized());
+        return;
+      }
 
       //Return the JWT and set the cookie
       res.cookie('token', token, {

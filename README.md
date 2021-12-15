@@ -10,10 +10,18 @@ This project consists on an API-Rest built with node, express, and mongodb. Incl
 4. `yarn husky install`
 5. `yarn dev` or `yarn start`
 
-## Build docker container
+## Run docker container
+
+Build image and run
 
 1. `docker build -t movies-api .`
 2. `docker run -p 3000:3000 -d movies-api`
+
+or with docker-compose...
+
+```
+docker-compose up -d
+```
 
 ## Example
 

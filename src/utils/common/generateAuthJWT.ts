@@ -1,20 +1,13 @@
-import { NextFunction } from 'express';
 import ApiKeysService from 'services/apiKeysService';
-import boom from '@hapi/boom';
 import jwt from 'jsonwebtoken';
 import { config } from 'config';
 
 // Generate a JWT with the user data and access scopes
-async function generateAuthJWT(
-  apiKeyToken: string,
-  user: any,
-  next: NextFunction
-) {
+async function generateAuthJWT(apiKeyToken: string, user: any) {
   const apiKeysService = new ApiKeysService();
 
   const apiKey = await apiKeysService.getApiKey(apiKeyToken);
   if (!apiKey) {
-    next(boom.unauthorized());
     return;
   }
 

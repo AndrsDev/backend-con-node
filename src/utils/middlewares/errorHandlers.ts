@@ -38,6 +38,7 @@ function errorHandler(
   res: Response,
   _next: NextFunction
 ): void {
+  console.error(err);
   res.status(err.output.statusCode);
   res.json(buildError(err));
 }

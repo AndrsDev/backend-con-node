@@ -34,7 +34,12 @@ function clientRoute(app: Express) {
       }
 
       const user: User = req.user as any;
-      const token = await generateAuthJWT(user.apiKeyToken ?? '', user, next);
+      const token = await generateAuthJWT(user.apiKeyToken ?? '', user);
+
+      if (!token) {
+        next(boom.unauthorized());
+        return;
+      }
 
       //Return the JWT and set the cookie
       res.cookie('token', token, {
